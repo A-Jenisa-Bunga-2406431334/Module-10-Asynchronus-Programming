@@ -124,3 +124,99 @@ Pada experiment ini:
 * async Tokio memungkinkan server menangani banyak koneksi secara bersamaan tanpa menghambat proses lain
 
 Konsep ini merupakan dasar dari aplikasi chat modern yang membutuhkan komunikasi cepat dan concurrent connection handling.
+
+## Experiment 2.2 — Mengubah Port WebSocket
+
+---
+
+# Perubahan yang Dilakukan
+
+Pada percobaan ini, port WebSocket diubah dari `2000` menjadi `8080`.
+
+Terdapat dua file yang dimodifikasi:
+
+## 1. `src/bin/server.rs`
+
+Port binding pada server diubah dari:
+
+```rust id="n5v8qk"
+2000
+```
+
+menjadi:
+
+```rust id="c2w7mz"
+8080
+```
+
+Server sekarang akan mendengarkan koneksi pada port `8080`.
+
+---
+
+## 2. `src/bin/client.rs`
+
+URL koneksi pada client juga diubah dari:
+
+```rust id="f9x1pa"
+ws://127.0.0.1:2000
+```
+
+menjadi:
+
+```rust id="r4m8yt"
+ws://127.0.0.1:8080
+```
+
+Client sekarang terhubung ke server menggunakan port baru.
+
+---
+
+# Kenapa Kedua File Harus Diubah?
+
+Program chat ini menggunakan arsitektur client-server.
+
+Artinya:
+
+* server membuka dan mendengarkan koneksi pada suatu port
+* client harus terhubung ke port yang sama
+
+Jika hanya salah satu sisi yang diubah:
+
+* server dan client akan menggunakan port berbeda
+* koneksi gagal dilakukan
+
+Contohnya:
+
+* server mendengarkan di `8080`
+* client masih mencoba connect ke `2000`
+
+maka client tidak akan menemukan server.
+
+---
+
+# Hasil Program
+
+Setelah kedua file diubah:
+
+* server berhasil berjalan pada port `8080`
+* semua client dapat terhubung dengan normal
+
+Output server sekarang menampilkan:
+
+```text id="y7d2kl"
+listening on port 8080
+```
+
+Dan client tetap dapat mengirim serta menerima pesan seperti sebelumnya.
+
+---
+
+# Kesimpulan
+
+Pada experiment ini dipahami bahwa:
+
+* port adalah jalur komunikasi antara client dan server
+* client dan server harus menggunakan port yang sama
+* perubahan konfigurasi koneksi harus dilakukan di kedua sisi
+
+Experiment ini juga menunjukkan bagaimana WebSocket connection bekerja dalam arsitektur jaringan berbasis client-server.
