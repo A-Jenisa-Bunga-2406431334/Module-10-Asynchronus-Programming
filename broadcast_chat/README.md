@@ -1,7 +1,5 @@
 ## Experiment 2.1 — Original Code of Broadcast Chat
 
----
-
 # Cara Menjalankan Program
 
 ## Terminal 1 — Menjalankan Server
@@ -125,9 +123,9 @@ Pada experiment ini:
 
 Konsep ini merupakan dasar dari aplikasi chat modern yang membutuhkan komunikasi cepat dan concurrent connection handling.
 
-## Experiment 2.2 — Mengubah Port WebSocket
-
 ---
+
+## Experiment 2.2 — Mengubah Port WebSocket
 
 # Perubahan yang Dilakukan
 
@@ -220,3 +218,98 @@ Pada experiment ini dipahami bahwa:
 * perubahan konfigurasi koneksi harus dilakukan di kedua sisi
 
 Experiment ini juga menunjukkan bagaimana WebSocket connection bekerja dalam arsitektur jaringan berbasis client-server.
+
+---
+
+## Experiment 2.3 — Menambahkan IP dan Port Pengirim
+
+# Perubahan yang Dilakukan
+
+Pada percobaan ini, kode di `src/bin/server.rs` dimodifikasi agar pesan broadcast juga menyertakan alamat IP dan port pengirim.
+
+---
+
+## Sebelum Diubah
+
+Sebelumnya server hanya mengirim isi pesan:
+
+```rust id="q7m2vk"
+bcast_tx.send(text.into())?;
+```
+
+Artinya client hanya menerima teks pesan tanpa mengetahui siapa pengirimnya.
+
+---
+
+## Setelah Diubah
+
+Kode diubah menjadi:
+
+```rust id="f4n8xp"
+bcast_tx.send(format!("{addr}: {text}"))?;
+```
+
+Sekarang server menambahkan:
+
+* IP address pengirim
+* port pengirim
+* isi pesan
+
+ke dalam broadcast message.
+
+---
+
+# Hasil Program
+
+Client sekarang menerima pesan dengan format seperti berikut:
+
+```text id="d8w1ls"
+127.0.0.1:54321: halo semua
+```
+
+Artinya:
+
+* `127.0.0.1` → alamat IP pengirim
+* `54321` → port client pengirim
+* `halo semua` → isi pesan
+
+---
+
+# Apa Manfaat Perubahan Ini?
+
+Dengan menambahkan IP dan port:
+
+* client dapat mengetahui siapa pengirim pesan
+* pesan menjadi lebih informatif
+* server dapat melakukan identifikasi koneksi dengan lebih jelas
+
+Konsep ini mirip seperti aplikasi chat yang menampilkan username pengirim di setiap pesan.
+
+---
+
+# Penjelasan Kode
+
+Bagian:
+
+```rust id="k3x7qd"
+format!("{addr}: {text}")
+```
+
+menggunakan macro `format!` di Rust untuk menggabungkan:
+
+* alamat client (`addr`)
+* isi pesan (`text`)
+
+menjadi satu string baru sebelum dikirim ke semua client.
+
+---
+
+# Kesimpulan
+
+Pada experiment ini:
+
+* server berhasil menambahkan identitas pengirim ke pesan broadcast
+* setiap client sekarang bisa melihat asal pesan
+* perubahan kecil pada server dapat meningkatkan informasi yang diterima client
+
+Experiment ini menunjukkan bagaimana data tambahan dapat disisipkan ke dalam proses broadcast pada aplikasi chat asynchronous berbasis WebSocket.
