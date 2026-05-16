@@ -117,6 +117,8 @@ fn main() {
         println!("Jenisa's Komputer: done!");
     });
 
+    println!("Jenisa's Komputer: hey hey"); 
+
     drop(spawner);
     executor.run();
 }
