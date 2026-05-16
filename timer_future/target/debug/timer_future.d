@@ -1,1 +1,0 @@
-C:\Users\Windows\ 10\Documents\Fasilkom\Term\ 4\ADPRO\module\ 10\Module-10-Asynchronus-Programming\timer_future\target\debug\timer_future.exe: C:\Users\Windows\ 10\Documents\Fasilkom\Term\ 4\ADPRO\module\ 10\Module-10-Asynchronus-Programming\timer_future\src\main.rs
