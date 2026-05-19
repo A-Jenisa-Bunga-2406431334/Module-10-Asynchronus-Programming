@@ -1,5 +1,3 @@
----
-
 ## Experiment 3.1: Kode Asli WebChat
 
 ### Cara Menjalankan
@@ -20,6 +18,9 @@ npm start
 Setelah kedua terminal berjalan, buka browser dan akses `http://localhost:8000`.
 
 ### Hasil
+
+
+<img width="1600" height="902" alt="WhatsApp Image 2026-05-19 at 17 06 47" src="https://github.com/user-attachments/assets/1cbed8d9-6563-4691-9945-042b4dd124ea" />
 
 Aplikasi webchat berhasil dijalankan di browser dengan tampilan yang terdiri dari panel Users di sebelah kiri, area Chat di tengah, dan kolom input pesan di bagian bawah. Pesan yang dikirim ditampilkan secara real-time melalui koneksi WebSocket.
 
@@ -45,3 +46,7 @@ Tampilan YewChat dimodifikasi dengan tema hijau dan beberapa perubahan UI:
 2. **Bubble chat berbeda** — pesan sendiri (kanan) menggunakan bubble hijau tua, pesan orang lain (kiri) menggunakan bubble hijau muda
 3. **Header diganti** — judul chat diubah menjadi "A-Jenisa-Bunga-2406431334's Chat!"
 4. **Status online** — panel users menampilkan status "🟢 Online" untuk setiap user yang terhubung
+
+<img width="1600" height="899" alt="WhatsApp Image 2026-05-19 at 17 06 47 (1)" src="https://github.com/user-attachments/assets/f82c6d73-f868-40fc-a749-9d339b323f91" />
+
+<img width="1600" height="899" alt="WhatsApp Image 2026-05-19 at 17 06 47 (2)" src="https://github.com/user-attachments/assets/6d5cc313-8025-4430-9363-4701320b481c" />
